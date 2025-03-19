@@ -3,8 +3,18 @@ document.addEventListener('DOMContentLoaded', function() {
   const betaForm = document.getElementById('demo-form'); // Keeping the ID but changing the purpose
   const newsletterForm = document.getElementById('newsletter-form');
   
-  // N8n webhook URL - replace this with your actual n8n webhook URL
-  const N8N_WEBHOOK_URL = 'https://prasannak.app.n8n.cloud/webhook-test/demo-request';
+  // Determine which webhook URL to use based on current environment
+  const isProd = window.location.hostname === 'shipfast.app' || 
+                 window.location.hostname === 'www.shipfast.app' || 
+                 window.location.hostname.includes('shipfast.netlify.app');
+  
+  // Set the appropriate webhook URL based on environment
+  const N8N_WEBHOOK_URL = isProd 
+    ? 'https://prasannak.app.n8n.cloud/webhook/demo-request' 
+    : 'https://prasannak.app.n8n.cloud/webhook-test/demo-request';
+  
+  console.log(`Environment: ${isProd ? 'Production' : 'Development'}`);
+  console.log(`Using webhook URL: ${N8N_WEBHOOK_URL}`);
   
   // Handle beta registration form submission
   if (betaForm) {
