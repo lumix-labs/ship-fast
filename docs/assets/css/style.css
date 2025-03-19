@@ -8,6 +8,28 @@
   --accent-light: #e1eeff;        /* Light blue accent */
   --success-color: #00b894;       /* Success green */
   --border-color: #e1e4e8;        /* Border color */
+  --bg-color: #ffffff;            /* Background color */
+  --header-bg: #ffffff;           /* Header background */
+  --header-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Header shadow */
+  --card-bg: #ffffff;             /* Card background */
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Card shadow */
+}
+
+[data-theme="dark"] {
+  --primary-color: #3b82f6;       /* Primary blue for dark theme */
+  --secondary-color: #60a5fa;     /* Secondary blue for dark theme */
+  --tertiary-color: #e5e7eb;      /* Light gray for dark theme */
+  --bg-light: #1f2937;            /* Dark blue background */
+  --text-dark: #f9fafb;           /* Light text for dark theme */
+  --text-light: #d1d5db;          /* Medium light text for dark theme */
+  --accent-light: #172032;        /* Dark blue accent */
+  --success-color: #10b981;       /* Success green for dark theme */
+  --border-color: #374151;        /* Border color for dark theme */
+  --bg-color: #111827;            /* Background color for dark theme */
+  --header-bg: #111827;           /* Header background for dark theme */
+  --header-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Header shadow for dark theme */
+  --card-bg: #1f2937;             /* Card background for dark theme */
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Card shadow for dark theme */
 }
 
 * {
@@ -20,7 +42,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   line-height: 1.6;
   color: var(--text-dark);
-  background-color: #ffffff;
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -32,12 +55,19 @@ body {
 
 /* Header */
 .site-header {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  background-color: var(--header-bg);
+  box-shadow: var(--header-shadow);
   padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo a {
@@ -47,6 +77,25 @@ body {
   text-decoration: none;
 }
 
+/* Theme toggle */
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text-dark);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--accent-light);
+}
+
 /* Section styles */
 .section {
   padding: 4rem 0;
@@ -54,14 +103,16 @@ body {
 
 .section.colored {
   background-color: var(--bg-light);
+  transition: background-color 0.3s ease;
 }
 
 .section.hero {
   padding: 6rem 0;
   text-align: center;
-  background: linear-gradient(135deg, #ffffff, var(--accent-light));
+  background: linear-gradient(135deg, var(--bg-color), var(--accent-light));
   position: relative;
   overflow: hidden;
+  transition: background 0.3s ease;
 }
 
 .hero h1 {
@@ -69,6 +120,7 @@ body {
   margin-bottom: 0.5rem;
   line-height: 1.2;
   color: var(--tertiary-color);
+  transition: color 0.3s ease;
 }
 
 .hero p {
@@ -78,6 +130,7 @@ body {
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  transition: color 0.3s ease;
 }
 
 /* Buttons */
@@ -131,6 +184,7 @@ h2 {
   font-size: 2rem;
   margin-bottom: 2rem;
   color: var(--tertiary-color);
+  transition: color 0.3s ease;
 }
 
 .features {
@@ -141,10 +195,10 @@ h2 {
 }
 
 .feature-card {
-  background: white;
+  background: var(--card-bg);
   padding: 2rem;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
   transition: all 0.3s;
   border-top: 3px solid var(--primary-color);
 }
@@ -163,6 +217,12 @@ h2 {
 .feature-card h3 {
   margin-bottom: 1rem;
   color: var(--tertiary-color);
+  transition: color 0.3s ease;
+}
+
+.feature-card p {
+  color: var(--text-dark);
+  transition: color 0.3s ease;
 }
 
 /* Steps */
@@ -174,15 +234,22 @@ h2 {
 .step {
   margin-bottom: 2rem;
   padding: 1.5rem;
-  background: white;
+  background: var(--card-bg);
   border-radius: 0.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
   border-left: 3px solid var(--primary-color);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .step h3 {
   color: var(--tertiary-color);
   margin-bottom: 0.75rem;
+  transition: color 0.3s ease;
+}
+
+.step p {
+  color: var(--text-dark);
+  transition: color 0.3s ease;
 }
 
 /* Testimonials */
@@ -195,10 +262,11 @@ h2 {
 
 .testimonial {
   padding: 2rem;
-  background: white;
+  background: var(--card-bg);
   border-radius: 0.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
   border-left: 3px solid var(--primary-color);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .quote {
@@ -206,6 +274,7 @@ h2 {
   font-style: italic;
   margin-bottom: 1.5rem;
   color: var(--text-dark);
+  transition: color 0.3s ease;
 }
 
 .author {
@@ -224,11 +293,13 @@ h2 {
 .author .name {
   font-weight: 600;
   color: var(--tertiary-color);
+  transition: color 0.3s ease;
 }
 
 .author .title {
   color: var(--text-light);
   font-size: 0.9rem;
+  transition: color 0.3s ease;
 }
 
 /* Audience Tabs */
@@ -274,10 +345,11 @@ h2 {
 }
 
 .tab-content {
-  background: white;
+  background: var(--card-bg);
   border-radius: 0.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
   overflow: hidden;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .tab-pane {
@@ -298,6 +370,8 @@ h2 {
   display: flex;
   align-items: flex-start;
   font-size: 1.1rem;
+  color: var(--text-dark);
+  transition: color 0.3s ease;
 }
 
 .feature-list li i {
@@ -311,13 +385,15 @@ h2 {
   overflow-x: auto;
   margin: 2rem 0;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
+  transition: box-shadow 0.3s ease;
 }
 
 .comparison-table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  background: var(--card-bg);
+  transition: background-color 0.3s ease;
 }
 
 .comparison-table th, 
@@ -325,12 +401,14 @@ h2 {
   padding: 1rem;
   text-align: center;
   border-bottom: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
 }
 
 .comparison-table th {
-  background-color: #f8f9fa;
+  background-color: var(--bg-light);
   font-weight: 600;
   color: var(--tertiary-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .comparison-table td:first-child {
@@ -359,10 +437,10 @@ h2 {
 }
 
 .capability-card {
-  background: white;
+  background: var(--card-bg);
   padding: 2rem;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
   transition: all 0.3s;
 }
 
@@ -380,6 +458,7 @@ h2 {
 .capability-card h3 {
   margin-bottom: 1rem;
   color: var(--tertiary-color);
+  transition: color 0.3s ease;
 }
 
 .capability-card ul {
@@ -390,6 +469,8 @@ h2 {
   margin-bottom: 0.75rem;
   position: relative;
   padding-left: 1.5rem;
+  color: var(--text-dark);
+  transition: color 0.3s ease;
 }
 
 .capability-card ul li::before {
@@ -410,11 +491,12 @@ h2 {
 }
 
 .faq-item {
-  background: white;
+  background: var(--card-bg);
   border-radius: 0.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
   margin-bottom: 1rem;
   overflow: hidden;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .faq-item h4 {
@@ -425,6 +507,7 @@ h2 {
   cursor: pointer;
   position: relative;
   color: var(--tertiary-color);
+  transition: color 0.3s ease;
 }
 
 .faq-item h4::after {
@@ -442,6 +525,8 @@ h2 {
 .faq-content {
   padding: 0 1.5rem 1.5rem;
   display: none;
+  color: var(--text-dark);
+  transition: color 0.3s ease;
 }
 
 .faq-content.active {
@@ -461,10 +546,12 @@ h2 {
 .form-control {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 0.25rem;
   font-size: 1rem;
   transition: border-color 0.3s;
+  background-color: var(--card-bg);
+  color: var(--text-dark);
 }
 
 .form-control:focus {
@@ -535,10 +622,10 @@ h2 {
 }
 
 .follow-option {
-  background: white;
+  background: var(--card-bg);
   padding: 2rem;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
   transition: all 0.3s;
   text-align: center;
 }
@@ -557,6 +644,12 @@ h2 {
 .follow-option h3 {
   margin-bottom: 1rem;
   color: var(--tertiary-color);
+  transition: color 0.3s ease;
+}
+
+.follow-option p {
+  color: var(--text-dark);
+  transition: color 0.3s ease;
 }
 
 .follow-option a {
@@ -579,9 +672,12 @@ h2 {
 .inline-form input {
   flex: 1;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 0.25rem 0 0 0.25rem;
   font-size: 0.9rem;
+  background-color: var(--card-bg);
+  color: var(--text-dark);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .inline-form button {
@@ -594,6 +690,11 @@ h2 {
   background-color: var(--tertiary-color);
   color: white;
   padding: 3rem 0;
+  transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .site-footer {
+  background-color: #0f172a;
 }
 
 .footer-columns {
