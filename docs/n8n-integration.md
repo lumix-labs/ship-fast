@@ -1,6 +1,6 @@
-# N8n Integration for Demo Request Form
+# N8n Integration for Form Handling
 
-This document explains how to set up the n8n workflow for handling demo requests and whitepaper downloads from the LegacyBoost website.
+This document explains how to set up the n8n workflow for handling demo requests and newsletter subscriptions from the Ship Fast website.
 
 ## Setup Instructions
 
@@ -12,14 +12,14 @@ This document explains how to set up the n8n workflow for handling demo requests
 
 3. Add a **Switch** node to handle different form types:
    - Connect it to the Webhook node
-   - Add a condition for `formType` equals `demo`
-   - Add another condition for `formType` equals `whitepaper`
+   - Add a condition for `formType` equals `beta`
+   - Add another condition for `formType` equals `newsletter`
 
-### For Demo Requests
+### For Demo/Beta Requests
 
 4. Add a **Set** node after the first switch output:
-   - Configure it to format the demo request data
-   - Map fields: name, company, email, teamSize, timestamp
+   - Configure it to format the beta request data
+   - Map fields: name, company, email, teamSize, source, timestamp
 
 5. Add a **PostgreSQL/MySQL/MongoDB** node (depending on your DB preference):
    - Connect to your database
@@ -29,33 +29,31 @@ This document explains how to set up the n8n workflow for handling demo requests
 6. Add an **Email** node:
    - Configure your SMTP settings
    - Set recipients:
-     - To: Your sales team email
-     - CC: Optional admin email
+     - To: Your team email
    - Set subject: "New Demo Request: {{$json.company}}"
    - Set HTML body with a template that includes all the lead information
 
 7. Add another **Email** node for confirmation email:
    - Set recipient to the lead's email: `{{$json.email}}`
-   - Set subject: "Your LegacyBoost Demo Request"
+   - Set subject: "Your Ship Fast Demo Request"
    - Set HTML body with a thank you message and next steps
 
-### For Whitepaper Downloads
+### For Newsletter Subscriptions
 
 8. Add a **Set** node after the second switch output:
-   - Configure it to format the whitepaper request data
-   - Map fields: email, timestamp
+   - Configure it to format the newsletter subscription data
+   - Map fields: email, source, timestamp
 
 9. Add a database node:
    - Connect to your database
-   - Create an "INSERT" operation to store the whitepaper download
+   - Create an "INSERT" operation to store the newsletter subscription
    - Map the fields from the Set node
 
 10. Add an **Email** node:
     - Configure with your SMTP settings
     - Set recipient to the user's email: `{{$json.email}}`
-    - Set subject: "Your LegacyBoost Whitepaper"
-    - Set HTML body with download information
-    - Attach the whitepaper PDF or include a secure download link
+    - Set subject: "Thanks for subscribing to Ship Fast updates"
+    - Set HTML body with a welcome message
 
 ### Final Steps
 
