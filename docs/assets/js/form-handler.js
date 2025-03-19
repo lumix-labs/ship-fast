@@ -4,9 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const newsletterForm = document.getElementById('newsletter-form');
   
   // Determine which webhook URL to use based on current environment
-  const isProd = window.location.hostname === 'shipfast.app' || 
-                 window.location.hostname === 'www.shipfast.app' || 
-                 window.location.hostname.includes('shipfast.netlify.app');
+  const isProd = window.location.hostname === 'lumix-labs.github.io' || 
+                 window.location.hostname.includes('lumix-labs.github.io');
   
   // Set the appropriate webhook URL based on environment
   const N8N_WEBHOOK_URL = isProd 
